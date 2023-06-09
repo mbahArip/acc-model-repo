@@ -1,0 +1,580 @@
+---
+import Layout from "../layouts/Layout.astro";
+import data from "../data.json";
+
+type CarData = {
+  id: string;
+  name: string;
+  brand: string;
+  class: string;
+  year: string;
+  key: string;
+};
+
+const channelId = "1116636974447591485";
+const baseUrl = "https://cdn.discordapp.com/attachments";
+---
+
+<Layout title="ACC Models Repository">
+  <nav
+    class="w-full py-2 flex items-center justify-center font-bold bg-zinc-900"
+  >
+    <span class="text-2xl"> AC:C Models Repository</span>
+  </nav>
+  <main
+    class="max-w-screen-md md:max-w-screen-lg mx-auto py-4 flex flex-col gap-2 px-2"
+  >
+    <div
+      role="alert"
+      class="py-2 px-4 w-full flex flex-col bg-amber-100 rounded-xl text-zinc-900"
+    >
+      <b>Note:</b>
+      <ul class="list-disc pl-4">
+        <li>
+          <b>All Copyrights</b> on the content presented in this archive owned directly
+          by <a
+            href="http://www.kunos-simulazioni.com/main/"
+            class="font-bold hover:underline">Kunos Simulazioni s.r.l.</a
+          >!
+        </li>
+        <li>
+          Files in the archive are <b>for informational purposes only!</b>
+        </li>
+        <li>
+          It's <b>strictly forbidden</b> to use this model for commercial purposes!
+        </li>
+      </ul>
+      <span class="my-2">
+        All 3D files are in GLTF format, you can use <a
+          href="https://www.blender.org/"
+          class="font-bold hover:underline">Blender</a
+        > to open them.
+      </span>
+    </div>
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div
+        role="alert"
+        class="py-2 px-4 w-full flex flex-col bg-blue-100 rounded-xl text-zinc-900"
+      >
+        <b>Common car parts <span class="text-red-500">[REQUIRED!]</span></b>
+        <p>
+          This archive contains common car parts that are required for some
+          models to work properly.<br />For example like tyres, lumirank, etc.
+        </p>
+        <a
+          href={`${baseUrl}/${channelId}/1116711773408612462/common_parts.rar`}
+          class="font-bold w-full text-center hover:underline bg-zinc-900 text-zinc-50 rounded-lg"
+        >
+          Download
+        </a>
+      </div>
+      <div
+        role="alert"
+        class="py-2 px-4 w-full flex flex-col bg-blue-100 rounded-xl text-zinc-900"
+      >
+        <b>Common car texture <span class="text-red-500">[REQUIRED!]</span></b>
+        <p>
+          This archive contains common car texture that are required for some
+          models to work properly.<br />For example like alcantara, carbon, etc.
+        </p>
+        <a
+          href={`${baseUrl}/${channelId}/1116711772964012152/common_texture.rar`}
+          class="font-bold w-full text-center hover:underline bg-zinc-900 text-zinc-50 rounded-lg"
+        >
+          Download
+        </a>
+      </div>
+    </div>
+    <div class="flex gap-2 w-full">
+      <label for="search" class="sr-only">Search</label>
+      <input
+        id="search"
+        placeholder="Search for car name or brand"
+        class="w-full bg-zinc-900 px-4 py-2 rounded-xl focus:outline-none border border-zinc-50/25"
+      />
+    </div>
+    <div id="data-display" class="grid grid-cols-1 md:grid-cols-2 gap-4 px-2">
+      {
+        data.map((item: CarData) => {
+          const isEvo = item.key.includes("evo");
+          return (
+            <div class="flex flex-col p-1 rounded-xl border border-zinc-50/25">
+              <div class="w-full h-fit relative">
+                <div
+                  class={`absolute top-0 left-0 px-4 py-1 ${item.class.toLowerCase()} font-bold rounded-tl-lg z-20`}
+                >
+                  {item.year}
+                </div>
+                <div
+                  class={`absolute top-0 right-0 px-4 py-1 ${item.class.toLowerCase()} font-bold rounded-tr-lg z-20`}
+                >
+                  {item.class}
+                </div>
+                <img
+                  loading="lazy"
+                  src={`/img/${item.key}.png`}
+                  alt={item.name}
+                  class="h-auto w-full aspect-auto rounded-lg relative top-0 z-10"
+                />
+              </div>
+              <div class="flex flex-col w-full h-full items-center justify-between">
+                <span class="text-center text-lg w-full font-bold">
+                  {item.name}
+                </span>
+                <span class="text-center text-sm w-full font-bold text-amber-500">
+                  {isEvo && "You may need to have the original model"}
+                </span>
+                <a
+                  href={`${baseUrl}/${channelId}/${item.id}/${item.key}.rar`}
+                  class="font-bold w-full text-center hover:underline bg-zinc-200 text-zinc-900 rounded-lg"
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </main>
+  <script>
+    const data = [
+      {
+        id: "1116637649449525248",
+        name: "Alpine A110 GT4",
+        brand: "Alpine",
+        class: "GT4",
+        year: "2018",
+        key: "alpine_a110_gt4",
+      },
+      {
+        id: "1116637899056746597",
+        name: "AMR V8 Vantage GT4",
+        brand: "Aston Martin",
+        class: "GT4",
+        year: "2018",
+        key: "amr_v8_vantage_gt4",
+      },
+      {
+        id: "1116657013833859192",
+        name: "AMR V8 Vantage GT3",
+        brand: "Aston Martin",
+        class: "GT3",
+        year: "2019",
+        key: "amr_v8_vantage_gt3",
+      },
+      {
+        id: "1116657015234777118",
+        name: "AMR V12 Vantage GT3",
+        brand: "Aston Martin",
+        class: "GT3",
+        year: "2013",
+        key: "amr_v12_vantage_gt3",
+      },
+      {
+        id: "1116638182168068116",
+        name: "Audi R8 LMS GT4",
+        brand: "Audi",
+        class: "GT4",
+        year: "2018",
+        key: "audi_r8_gt4",
+      },
+      {
+        id: "1116657015608062013",
+        name: "Audi R8 LMS",
+        brand: "Audi",
+        class: "GT3",
+        year: "2015",
+        key: "audi_r8_lms",
+      },
+      {
+        id: "1116657015964565596",
+        name: "Audi R8 LMS Evo",
+        brand: "Audi",
+        class: "GT3",
+        year: "2019",
+        key: "audi_r8_lms_evo",
+      },
+      {
+        id: "1116657016379822121",
+        name: "Audi R8 LMS Evo II",
+        brand: "Audi",
+        class: "GT3",
+        year: "2022",
+        key: "audi_r8_lms_evo_ii",
+      },
+      {
+        id: "1116638618098864158",
+        name: "BMW M4 GT4",
+        brand: "BMW",
+        class: "GT4",
+        year: "2018",
+        key: "bmw_m4_gt4",
+      },
+      {
+        id: "1116650334035656724",
+        name: "BMW M2 CS Racing",
+        brand: "BMW",
+        class: "TCX",
+        year: "2020",
+        key: "bmw_m2_cs_racing",
+      },
+      {
+        id: "1116657017533255721",
+        name: "BMW M4 GT3",
+        brand: "BMW",
+        class: "GT3",
+        year: "2022",
+        key: "bmw_m4_gt3",
+      },
+      {
+        id: "1116657017898151946",
+        name: "BMW M6 GT3",
+        brand: "BMW",
+        class: "GT3",
+        year: "2017",
+        key: "bmw_m6_gt3",
+      },
+      {
+        id: "1116657016765689896",
+        name: "Bentley Continental GT3",
+        brand: "Bentley",
+        class: "GT3",
+        year: "2015",
+        key: "bentley_continental_gt3_2016",
+      },
+      {
+        id: "1116657017168330802",
+        name: "Bentley Continental GT3",
+        brand: "Bentley",
+        class: "GT3",
+        year: "2018",
+        key: "bentley_continental_gt3_2018",
+      },
+      {
+        id: "1116644791409721444",
+        name: "Chevrolet Camaro GT4.R",
+        brand: "Chevrolet",
+        class: "GT4",
+        year: "2017",
+        key: "chevrolet_camaro_gt4r",
+      },
+      {
+        id: "1116667852557140048",
+        name: "Ferrari 296 GT3",
+        brand: "Ferrari",
+        class: "GT3",
+        year: "2023",
+        key: "ferrari_296_gt3",
+      },
+      {
+        id: "1116667852968185956",
+        name: "Ferrari 488 Challenge Evo",
+        brand: "Ferrari",
+        class: "CHL",
+        year: "2020",
+        key: "ferrari_488_challenge_evo",
+      },
+      {
+        id: "1116667853463105597",
+        name: "Ferrari 488 GT3",
+        brand: "Ferrari",
+        class: "GT3",
+        year: "2018",
+        key: "ferrari_488_gt3",
+      },
+      {
+        id: "1116667853878345749",
+        name: "Ferrari 488 GT3 Evo",
+        brand: "Ferrari",
+        class: "GT3",
+        year: "2020",
+        key: "ferrari_488_gt3_evo",
+      },
+      {
+        id: "1116645229643190334",
+        name: "Ginetta G55 GT4",
+        brand: "Ginetta",
+        class: "GT4",
+        year: "2012",
+        key: "ginetta_g55_gt4",
+      },
+      {
+        id: "1116667854364889089",
+        name: "Honda NSX GT3",
+        brand: "Honda",
+        class: "GT3",
+        year: "2017",
+        key: "honda_nsx_gt3",
+      },
+      {
+        id: "1116667854763343882",
+        name: "Honda NSX GT3 Evo",
+        brand: "Honda",
+        class: "GT3",
+        year: "2019",
+        key: "honda_nsx_gt3_evo",
+      },
+      {
+        id: "1116667855132446721",
+        name: "Emil Frey Jaguar G3",
+        brand: "Jaguar",
+        class: "GT3",
+        year: "2012",
+        key: "jaguar_g3",
+      },
+      {
+        id: "1116645230054219837",
+        name: "KTM X-Bow GT4",
+        brand: "KTM",
+        class: "GT4",
+        year: "2016",
+        key: "ktm_xbow_gt4",
+      },
+      {
+        id: "1116667856143269898",
+        name: "Lamborghini Huracan GT3",
+        brand: "Lamborghini",
+        class: "GT3",
+        year: "2015",
+        key: "lamborghini_huracan_gt3",
+      },
+      {
+        id: "1116667856562704425",
+        name: "Lamborghini Huracan GT3 Evo",
+        brand: "Lamborghini",
+        class: "GT3",
+        year: "2019",
+        key: "lamborghini_huracan_gt3_evo",
+      },
+      {
+        id: "1116667971088166922",
+        name: "Lamborghini Huracan GT3 Evo2",
+        brand: "Lamborghini",
+        class: "GT3",
+        year: "2023",
+        key: "lamborghini_huracan_gt3_evo2",
+      },
+      {
+        id: "1116667971495010416",
+        name: "Lamborghini Huracan ST",
+        brand: "Lamborghini",
+        class: "ST",
+        year: "2015",
+        key: "lamborghini_huracan_st",
+      },
+      {
+        id: "1116667971943805049",
+        name: "Lamborghini Huracan ST Evo2",
+        brand: "Lamborghini",
+        class: "ST",
+        year: "2021",
+        key: "lamborghini_huracan_st_evo2",
+      },
+      {
+        id: "1116667972325482636",
+        name: "Lexus RC F GT3",
+        brand: "Lexus",
+        class: "GT3",
+        year: "2016",
+        key: "lexus_rc_f_gt3",
+      },
+      {
+        id: "1116645230440091688",
+        name: "Maserati GranTurismo MC GT4",
+        brand: "Maserati",
+        class: "GT4",
+        year: "2016",
+        key: "maserati_mc_gt4",
+      },
+      {
+        id: "1116645230800818287",
+        name: "McLaren 570S GT4",
+        brand: "McLaren",
+        class: "GT4",
+        year: "2016",
+        key: "mclaren_570s_gt4",
+      },
+      {
+        id: "1116667972774277120",
+        name: "McLaren 650S GT3",
+        brand: "McLaren",
+        class: "GT3",
+        year: "2015",
+        key: "mclaren_650s_gt3",
+      },
+      {
+        id: "1116667976809193562",
+        name: "McLaren 720S GT3",
+        brand: "McLaren",
+        class: "GT3",
+        year: "2019",
+        key: "mclaren_720s_gt3",
+      },
+      {
+        id: "1116645231199264808",
+        name: "Mercedes-AMG GT4",
+        brand: "Mercedes-AMG",
+        class: "GT4",
+        year: "2016",
+        key: "mercedes_amg_gt4",
+      },
+      {
+        id: "1116667977778081792",
+        name: "Mercedes-AMG GT3",
+        brand: "Mercedes-AMG",
+        class: "GT3",
+        year: "2015",
+        key: "mercedes_amg_gt3",
+      },
+      {
+        id: "1116667978180730890",
+        name: "Mercedes-AMG GT3 2020",
+        brand: "Mercedes-AMG",
+        class: "GT3",
+        year: "2020",
+        key: "mercedes_amg_gt3_evo",
+      },
+      {
+        id: "1116667978646294658",
+        name: "Nissan GT-R Nismo GT3",
+        brand: "Nissan",
+        class: "GT3",
+        year: "2015",
+        key: "nissan_gt_r_gt3_2017",
+      },
+      {
+        id: "1116668625491857468",
+        name: "Nissan GT-R Nismo GT3",
+        brand: "Nissan",
+        class: "GT3",
+        year: "2018",
+        key: "nissan_gt_r_gt3_2018",
+      },
+      {
+        id: "1116645231585136640",
+        name: "Porsche 718 Cayman GT4 Clubsport",
+        brand: "Porsche",
+        class: "GT4",
+        year: "2019",
+        key: "porsche_718_cayman_gt4_mr",
+      },
+      {
+        id: "1116668625902895196",
+        name: "Porsche 911 GT3 R",
+        brand: "Porsche",
+        class: "GT3",
+        year: "2018",
+        key: "porsche_991_gt3_r",
+      },
+      {
+        id: "1116668626334912583",
+        name: "Porsche 911II GT3 Cup",
+        brand: "Porsche",
+        class: "CUP",
+        year: "2017",
+        key: "porsche_991ii_gt3_cup",
+      },
+      {
+        id: "1116668626997612544",
+        name: "Porsche 911II GT3 R",
+        brand: "Porsche",
+        class: "GT3",
+        year: "2019",
+        key: "porsche_991ii_gt3_r",
+      },
+      {
+        id: "1116668627408670761",
+        name: "Porsche 992 GT3 Cup",
+        brand: "Porsche",
+        class: "CUP",
+        year: "2021",
+        key: "porsche_992_gt3_cup",
+      },
+      {
+        id: "1116668627811307591",
+        name: "Porsche 992 GT3 R",
+        brand: "Porsche",
+        class: "GT3",
+        year: "2023",
+        key: "porsche_992_gt3_r",
+      },
+      {
+        id: "1116667855598006302",
+        name: "Reiter Engineering R-EX GT3",
+        brand: "Reiter Engineering",
+        class: "GT3",
+        year: "2017",
+        key: "lamborghini_gallardo_rex",
+      },
+    ];
+    const searchInput = document.querySelector<HTMLInputElement>("#search");
+    const dataDisplay = document.querySelector<HTMLDivElement>("#data-display");
+    let filteredData = data;
+
+    const channelId = "1116636974447591485";
+    const baseUrl = "https://cdn.discordapp.com/attachments";
+
+    function handleFilter(query: string) {
+      if (!query) {
+        filteredData = data;
+      } else {
+        filteredData = data.filter((item) => {
+          return (
+            item.name.toLowerCase().includes(query.toLowerCase()) ||
+            item.brand.toLowerCase().includes(query.toLowerCase())
+          );
+        });
+      }
+      displayItems(filteredData);
+    }
+
+    function displayItems(items: CarData[]) {
+      dataDisplay.innerHTML = "";
+      items.forEach((item) => {
+        const isEvo = item.key.includes("evo");
+        const itemElement = document.createElement("div");
+        itemElement.classList.add(
+          "flex",
+          "flex-col",
+          "p-1",
+          "rounded-xl",
+          "border",
+          "border-zinc-50/25"
+        );
+        itemElement.innerHTML = `
+        <div class="w-full h-fit relative">
+          <div class="absolute top-0 left-0 px-4 py-1 ${item.class.toLowerCase()} font-bold rounded-tl-lg">
+            ${item.year}
+          </div>
+          <div class="absolute top-0 right-0 px-4 py-1 ${item.class.toLowerCase()} font-bold rounded-tr-lg">
+            ${item.class}
+          </div>
+          <img loading="lazy" src="/img/${item.key}.png" alt="${
+          item.name
+        }" class="h-auto w-full aspect-auto rounded-lg" />
+        </div>
+        <div class="flex flex-col w-full h-full items-center justify-between">
+          <span class="text-center text-lg w-full font-bold">
+            ${item.name}
+          </span>
+          <span class="text-center text-sm w-full font-bold text-amber-500">
+            ${isEvo ? "You may need to have the original model" : ""}
+          </span>
+          <a href="${baseUrl}/${channelId}/${item.id}/${
+          item.key
+        }.rar" class="font-bold w-full text-center hover:underline bg-zinc-200 text-zinc-900 rounded-lg">
+            Download
+          </a>
+        </div>
+      `;
+        dataDisplay.appendChild(itemElement);
+      });
+    }
+
+    searchInput.addEventListener("input", () => {
+      const searchTerm = searchInput.value;
+      handleFilter(searchTerm);
+    });
+  </script>
+</Layout>
